@@ -1,1 +1,1 @@
-# DataIngester
+# Data Collector
