@@ -1,9 +1,9 @@
 package com.lunatech.collector
 
 import java.util.Properties
+import org.apache.kafka.clients.producer.{KafkaProducer, ProducerConfig, ProducerRecord}
 
 import akka.actor.Props
-import org.apache.kafka.clients.producer.{KafkaProducer, ProducerConfig, ProducerRecord}
 
 object collector extends App  {
 

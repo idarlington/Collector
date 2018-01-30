@@ -6,6 +6,8 @@ import akka.http.scaladsl.model._
 import akka.stream.{ ActorMaterializer, ActorMaterializerSettings }
 import akka.util.ByteString
 
+final case class Vehicle(id: String)
+
 class StreamActor extends Actor
   with ActorLogging {
 
