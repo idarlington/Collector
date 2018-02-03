@@ -11,5 +11,6 @@ libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-stream" % akkaVersion,
   "com.typesafe.akka" %% "akka-http" % "10.0.10",
   "org.apache.kafka" %% "kafka" % "0.11.0.2",
-  "com.typesafe.akka" %% "akka-http-spray-json" % "10.1.0-RC1"
+  "com.typesafe.akka" %% "akka-http-spray-json" % "10.1.0-RC1",
+  "com.outworkers"  %% "phantom-dsl" % "2.20.0"
 )

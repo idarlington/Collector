@@ -75,6 +75,13 @@ class TileSystem {
 		( pixelX, pixelY )
 	}
 
+	def latLongToTileXY( latitude : Double, longitude : Double, levelOfDetail : Int ) : ( Int, Int ) = {
+		val ( pixelX, pixelY ) = latLongToPixelXY( latitude, longitude, levelOfDetail )
+		val ( tileX, tileY ) = pixelXYToTileXY( pixelX, pixelY )
+
+		( tileX, tileY )
+	}
+
 	def tileXYToQuadKey( tileX : Int, tileY : Int, levelOfDetail : Int ) : String = {
 		val digits = levelOfDetail to 1 by -1 map { level : Int ⇒
 			var digit = 0
