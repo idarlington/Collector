@@ -35,3 +35,6 @@ class ServiceActor extends Actor with ActorLogging{
 		}
 	}
 }
+
+
+//TODO Clean up naming

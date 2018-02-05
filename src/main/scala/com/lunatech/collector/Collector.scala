@@ -15,3 +15,7 @@ import akka.actor.Props
 
 	system.scheduler.schedule( 0 milliseconds, 10 seconds, streamActor, "" )
 }*/
+
+
+//TODO Switch to two different projects
+//TODO Add Config File
