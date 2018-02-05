@@ -8,11 +8,7 @@ import akka.http.scaladsl.model._
 import akka.http.scaladsl.unmarshalling.Unmarshal
 import akka.pattern.pipe
 import akka.stream.{ActorMaterializer, ActorMaterializerSettings}
-import akka.util.ByteString
-import org.apache.kafka.clients.producer.{KafkaProducer, ProducerConfig, ProducerRecord}
-import spray.json.JsonParser
-
-import scala.concurrent.duration.DurationInt
+import org.apache.kafka.clients.producer.{KafkaProducer, ProducerConfig}
 
 case class TiledVehicle(
 	id : String,
@@ -66,19 +62,7 @@ class StreamActor extends Actor with ActorLogging with JsonFormatSupport {
 
 	def receive = {
 		case HttpResponse( StatusCodes.OK, headers, entity, _ ) ⇒ {
-      /*entity.toStrict(10.seconds).foreach { strict =>
-        val r = strict.data.toArray
-        JsonParser(r).convertTo[VehicleList]
-        producer.send(
-          new ProducerRecord[ String, String ]( "vehicles", r )
-        )
-      }*/
-
-      import spray.json._
-
 			Unmarshal(entity).to[VehicleList].map { vehicleList =>
-        /*log.info("Vehicle: " + vehicleList.items)*/
-        /*println()*/
         vehicleList.items.foreach{ vehicle =>
           val id = vehicle.id
 					val heading = vehicle.heading
@@ -89,23 +73,13 @@ class StreamActor extends Actor with ActorLogging with JsonFormatSupport {
 					val seconds_since_report = vehicle.seconds_since_report
 					val predictable = vehicle.predictable
           val tile = tileSystem.latLongToTileXY(latitude,longitude,levelOfDetail)
-          /*log.info(tile.toString())*/
 
           val tiledVehicle = TiledVehicle(id, heading, latitude, longitude, run_id, route_id, seconds_since_report, predictable, tile)
           log.info(tiledVehicle.toString)
           Database.saveOrUpdate((tiledVehicle))
           log.info("Saved to DB")
         }
-        /*val jsonString  = vehicleList.items.head.toJson*/
-        /*log.info(jsonString.toString())*/
       }
-
-			/*entity.dataBytes.runFold( ByteString( "" ) )( _ ++ _ ).foreach { body ⇒
-				producer.send(
-					new ProducerRecord[ String, String ]( "vehicles", body.utf8String )
-				)
-				log.info( "Got response, body: "+body.utf8String )
-			}*/
 		}
 		case resp @ HttpResponse( code, _, _, _ ) ⇒
 			log.info( "Request failed, response code: "+code )
