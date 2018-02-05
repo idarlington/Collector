@@ -27,6 +27,7 @@ abstract class VehiclesByTileModel
 			.consistencyLevel_=( ConsistencyLevel.ONE )
 			.fetch()
 	}
+
 }
 
 abstract class VehiclesModel extends Table[ VehiclesModel, TiledVehicle ] {
@@ -35,7 +36,7 @@ abstract class VehiclesModel extends Table[ VehiclesModel, TiledVehicle ] {
 	object id extends StringColumn with PartitionKey {
 		override lazy val name = "vehicle_id"
 	}
-	object tile extends Col[ ( Int, Int ) ]
+	object tile extends Col[ ( Int, Int ) ]/**/
 	object heading extends DoubleColumn
 	object latitude extends DoubleColumn
 	object longitude extends DoubleColumn

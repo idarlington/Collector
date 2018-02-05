@@ -13,4 +13,4 @@ libraryDependencies ++= Seq(
   "org.apache.kafka" %% "kafka" % "0.11.0.2",
   "com.typesafe.akka" %% "akka-http-spray-json" % "10.1.0-RC1",
   "com.outworkers"  %% "phantom-dsl" % "2.20.0"
-)
+) map (_.exclude ("org.slf4j", "log4j-over-slf4j"))
