@@ -2,7 +2,7 @@ package com.lunatech.collector
 
 import akka.actor.Props
 
-object collector extends App {
+/*object collector extends App {
 
 	implicit val system = akka.actor.ActorSystem()
 
@@ -14,4 +14,4 @@ object collector extends App {
 	import scala.language.postfixOps
 
 	system.scheduler.schedule( 0 milliseconds, 10 seconds, streamActor, "" )
-}
+}*/
